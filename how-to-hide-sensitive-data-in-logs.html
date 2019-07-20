@@ -1,4 +1,9 @@
-<div dir="ltr" style="text-align: left;" trbidi="on">
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+  </head>
+<body>
+  <div dir="ltr" style="text-align: left;" trbidi="on">
 <i>Note: This post is about situations when you (for whatever reason) need to deal with sensitive information, like passwords, in unencrypted format.</i><br />
 <br />
 When using a messaging system like RabbitMQ, it is a good practice to structure your messages, for example, using JSON or XML format. Then you may delegate the serialization and deserialization to a specialized component (or if it is simple enough, just a third party library) – let’s call it the `broker` component. You may then even enable the logging of debugging information by putting every message send over the queue on your debug logs. But then what if you need to send sensitive information like passwords or credit card numbers around?<br />
@@ -21,3 +26,5 @@ Ideally, the serialization libraries should support encryption/obfuscation of ce
 <div>
 <br /></div>
 </div>
+  </body>
+</html>
