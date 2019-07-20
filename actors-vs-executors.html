@@ -1,4 +1,9 @@
-<div dir="ltr" style="text-align: left;" trbidi="on">
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+  </head>
+<body>
+  <div dir="ltr" style="text-align: left;" trbidi="on">
 Conceptually an actor has one thread of execution, which means it can run only one method at a time. Practically, however, allocating a real thread for each actor is highly expensive. Very roughly speaking, an executor service in Java provides a queue of tasks and an efficient way of running those tasks on a few threads. Due to the optimizations provided by Java implementations, an executor in principle is the best way to scale to many concurrent tasks. We use the terms executor and thread-pool interchangeably. There are two possibilities in how to use executors when modeling actors.<br />
 <br />
 <h3 style="text-align: left;">
@@ -160,3 +165,6 @@ Completion of futures</h3>
 The problem is when an actor has no enabled messages, it may only be reenabled when a future it is waiting on completes. But how should the actor be awakened in this case? The answer is by the actor who completes the future.<br />
 <br />
 There must be a global hash table, mapping every future to the set of actors that are awaiting on its completion. When a future completes (basically when a method finishes), the current actor looks up this future in this hash table, and sends a special `enable` method to all awaiting actors, and this method takes the future as the parameter. On the other side, every actor puts the messages awaiting a future into a special queue of suspended messages. The `enable` method takes the message waiting in this future and puts them to the default queue of enabled messages. Note that the messages awaiting on boolean conditions, are in separate queues as we discussed in the previous post.</div>
+
+  </body>
+</html>
