@@ -9,11 +9,20 @@
         <meta name="GOOGLEBOT" content="INDEX,FOLLOW">
 
         <style>
-        	div.content { max-width: 960px }
+        	
+        	div.content { 
+        		display: flex;
+  				flex-flow: column;
+        		max-width: 960px;
+        		flex: auto;
+        		background-color: #fffbf2;
+        		height: 100vh;
+        	}
 
 .button_block {
+	align-self: center;
   display: block;
-  width: 100%;
+  width: 90%;
   border: none;
   background-color: #e3ffcf;
   color: blue;
@@ -35,14 +44,34 @@
   bottom: 0;
   width: 100%;
   text-align: center;
+  background-color: #ebeae8;
+  padding: 10px;
+}
+
+.lpage {
+	display: none;
+}
+
+@media only screen and (min-width: 768px) {
+	.lpage {
+		display: block;
+		width: 15%;
+	}	
+}
+
+.page {
+	display: flex;
+	flex-wrap: row;
 }
 </style>
 
   </head>
 <body>
+	<div class="page">
+	<div class="lpage"></div>
 	  <div class="content">
 
-<h1>Making Legacy Concurrent</h1>
+<h1 style="margin-left: 15px;margin-right: 15px">Making Legacy Concurrent</h1>
   
   <button class="button_block">
    <a href="Designing-framework-to-support-remote-and-local-actors-transparently.html">Designing a framework to support remote and local actors transparently. </a>
@@ -55,8 +84,11 @@
    </button>
   </div>
 
+  	<div class="lpage"></div>
+
+</div>
+
   <div class="footer">
-  	<hr />
   	KvK Number:  65354346 - BTW Number: NL002455714B97 - dockmeh@gmail.com
   </div>
 </body>
