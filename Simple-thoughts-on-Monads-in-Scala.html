@@ -1,18 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link rel="stylesheet" href="./css/main.css" />
-  </head>
-<body>
-  <i>A usual question in Scala interviews is about monads. A specific question I was asked was whether you can mix different types of monads inside one for comprehension. I had never thought about whether that makes sense or not. After that interview I repeatedly thought about it, and I want to write about it here.&nbsp;</i><br />
-<br />
-But first things first. Let's first get it straight. In simple words, what is a monad?<br />
-&nbsp; &nbsp; "Consider a monad is a container. That is, it can contain some value."<br />
-<br />
-But why should you need a container? Why not just put the value out there? Why bother going through the trouble of making a container to hold the value while I can just simply use the value? The answer is, I <i>cannot</i>&nbsp;always just simply use the value. For example, suppose you don't always know if there is any value actually (ever had nightmares about NullPointerExceptions?). Or the value could be <i>eventually</i>&nbsp;there, but not yet (as it is being calculated somewhere else). Maybe I am calculating it myself, but then what if an error occurs (like my database catches fire) while calculating the value? Hmm, thinking about a container... could it also contain more than one value? It is a container after all.<br />
-<br />
-Wait... these are all now very different scenarios. Could a single container handle all these cases? Or are there then different types of such containers?<br />
-<br />
-Well, in Scala we have different sorts of monads. But obviously, they all do share the same characteristic of <i>being a container</i>. Imagine you buy a gift and put it in a box, then wrap in gift paper. Then you put a few such gifts into another bigger box to be able to post them together. In the end, the gift itself (or all the gifts) is what matters and all those boxes and wrap paper are serving that purpose.
-  </body>
+	<link rel="stylesheet" href="./css/main.css" />
+	<title>Dockmeh Consultancy - Freelance Data & Software Engineers </title>
+	<meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+	<meta name="description" content="Freelance fullstack software engineering experts in distributed systems, quality software and data engineering">
+	<meta name="robots" content="INDEX,FOLLOW">
+	<meta name="GOOGLEBOT" content="INDEX,FOLLOW">
+</head>
+<body class="body">
+	<div class="page">
+		<div class="lpage"></div>
+		<div class="content">
+			<i>A usual question in Scala interviews is about monads. A specific question I was asked was whether you can mix different types of monads inside one for comprehension. I had never thought about whether that makes sense or not. After that interview I repeatedly thought about it, and I want to write about it here.&nbsp;</i><br />
+			<br />
+			But first things first. Let's first get it straight. In simple words, what is a monad?<br />
+			&nbsp; &nbsp; "Consider a monad is a container. That is, it can contain some value."<br />
+			<br />
+			But why should you need a container? Why not just put the value out there? Why bother going through the trouble of making a container to hold the value while I can just simply use the value? The answer is, I <i>cannot</i>&nbsp;always just simply use the value. For example, suppose you don't always know if there is any value actually (ever had nightmares about NullPointerExceptions?). Or the value could be <i>eventually</i>&nbsp;there, but not yet (as it is being calculated somewhere else). Maybe I am calculating it myself, but then what if an error occurs (like my database catches fire) while calculating the value? Hmm, thinking about a container... could it also contain more than one value? It is a container after all.<br />
+			<br />
+			Wait... these are all now very different scenarios. Could a single container handle all these cases? Or are there then different types of such containers?<br />
+			<br />
+			Well, in Scala we have different sorts of monads. But obviously, they all do share the same characteristic of <i>being a container</i>. Imagine you buy a gift and put it in a box, then wrap in gift paper. Then you put a few such gifts into another bigger box to be able to post them together. In the end, the gift itself (or all the gifts) is what matters and all those boxes and wrap paper are serving that purpose.
+
+		</div>
+
+	</div>
+	<div class="footer">
+		KvK Number:  65354346 - BTW Number: NL002455714B97 - dockmeh-at-gmail-dot-com
+	</div>
+</body>
 </html>
