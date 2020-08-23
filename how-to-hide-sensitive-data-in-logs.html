@@ -1,30 +1,47 @@
 <html>
 <head>
-<link rel="stylesheet" href="./css/main.css" />
-  </head>
-<body>
-  <div dir="ltr" style="text-align: left;" trbidi="on">
-<i>Note: This post is about situations when you (for whatever reason) need to deal with sensitive information, like passwords, in unencrypted format.</i><br />
-<br />
-When using a messaging system like RabbitMQ, it is a good practice to structure your messages, for example, using JSON or XML format. Then you may delegate the serialization and deserialization to a specialized component (or if it is simple enough, just a third party library) – let’s call it the `broker` component. You may then even enable the logging of debugging information by putting every message send over the queue on your debug logs. But then what if you need to send sensitive information like passwords or credit card numbers around?<br />
-<br />
-<h3 style="text-align: left;">
-Encryption Upon Logging</h3>
-You may choose to encrypt all information (thus including the sensitive parts) sent over the message queue, but in your logs you still want to see the data unencrypted (except for the passwords). A reasonable option is to encrypt only the passwords just before writing to the logs, or before sending on the message queue. Notice that here by encryption, we mean reversible encryption, or you may just as well call it obfuscation. The advantage of this approach is that you can choose to totally exclude passwords from being written in the logs, instead of encrypting them (for security reasons). Another advantage is that all of the code to deal with encryption and decryption is in one component, the `broker`.<br />
-<br />
-At the same time, this means you will need to parse every message and look for such sensitive information. The down side is that, on one hand, it needs a lot of processing, and on the other hand, it requires the `broker` component to know about your program logic in order to detect all sensitive information. In fact, if it was not for encryption of the passwords, the `broker` could just receive the serialized information (say in a `String`) and then do the sending and receiving of `String`s to/from the message queue. But to deal with passwords, it would then need to parse those strings to extract and obfuscate/remove the passwords.<br />
-<br />
-<h3 style="text-align: left;">
-Encryption At Source</h3>
-Another alternative is to encrypt the sensitive information at source, when you receive them (somewhat like when you hash the passwords in a non-reversible way at the source, and later only deal with the hashed value). In this way, your `broker` can be ignorant of existence of sensitive data and just send any string it receives onto the message queue. The target component that will need this information will then decrypt them before use. This simplifies the implementation of the `broker` in the sense that it will only need to handle one task, i.e., brokering, which is in line with “single responsibility principle”. The disadvantages of this approach are that the code for encryption and decryption will be spread all around.<br />
-<br />
-Additionally, you will need to add an extra layer of security to your system in order to protect your logs from third party access. Because the sensitive information are only obfuscated and, even though, not readable by human eye, they are still readable by computers.<br />
-<br />
-<h3 style="text-align: left;">
-Conclusion</h3>
-Ideally, the serialization libraries should support encryption/obfuscation of certain fields. In this way, we only need to mark those sensitive fields (for example using annotations in languages like Java) and the library will take care of this extra step. It will have the advantages of both approaches above: the encryption/decryption code is kept together, while the logic of what information is sensitive is kept to the source. Furthermore, the serialization library may provide you with non-reversible encryption or totally removing the sensitive data while serializing, to be used in the case of logging or similar.<br />
-<div>
-<br /></div>
-</div>
-  </body>
+	<link rel="stylesheet" href="./css/main.css" />
+	<title>Dockmeh Consultancy - Make Software Great</title>
+	<meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+	<meta name="description" content="Freelance fullstack software engineering experts in distributed systems, quality software and data engineering">
+	<meta name="robots" content="INDEX,FOLLOW">
+	<meta name="GOOGLEBOT" content="INDEX,FOLLOW">
+</head>
+<body class="body">
+	<div class="page">
+		<div class="lpage"></div>
+		<div class="content">
+			<h2>How to hide sensitive information (like passwords) in plain-text logs</h2>
+			<i>Note: This post is about situations when you (for whatever reason) need to deal with sensitive information, like passwords, in unencrypted format.</i><br />
+			<br />
+			When using a messaging system like RabbitMQ, it is a good practice to structure your messages, for example, using JSON or XML format. Then you may delegate the serialization and deserialization to a specialized component (or if it is simple enough, just a third party library) – let’s call it the `broker` component. You may then even enable the logging of debugging information by putting every message send over the queue on your debug logs. But then what if you need to send sensitive information like passwords or credit card numbers around?<br />
+			<br />
+			<h3 style="text-align: left;">
+			Encryption Upon Logging</h3>
+			You may choose to encrypt all information (thus including the sensitive parts) sent over the message queue, but in your logs you still want to see the data unencrypted (except for the passwords). A reasonable option is to encrypt only the passwords just before writing to the logs, or before sending on the message queue. Notice that here by encryption, we mean reversible encryption, or you may just as well call it obfuscation. The advantage of this approach is that you can choose to totally exclude passwords from being written in the logs, instead of encrypting them (for security reasons). Another advantage is that all of the code to deal with encryption and decryption is in one component, the `broker`.<br />
+			<br />
+			At the same time, this means you will need to parse every message and look for such sensitive information. The down side is that, on one hand, it needs a lot of processing, and on the other hand, it requires the `broker` component to know about your program logic in order to detect all sensitive information. In fact, if it was not for encryption of the passwords, the `broker` could just receive the serialized information (say in a `String`) and then do the sending and receiving of `String`s to/from the message queue. But to deal with passwords, it would then need to parse those strings to extract and obfuscate/remove the passwords.<br />
+			<br />
+			<h3 style="text-align: left;">
+			Encryption At Source</h3>
+			Another alternative is to encrypt the sensitive information at source, when you receive them (somewhat like when you hash the passwords in a non-reversible way at the source, and later only deal with the hashed value). In this way, your `broker` can be ignorant of existence of sensitive data and just send any string it receives onto the message queue. The target component that will need this information will then decrypt them before use. This simplifies the implementation of the `broker` in the sense that it will only need to handle one task, i.e., brokering, which is in line with “single responsibility principle”. The disadvantages of this approach are that the code for encryption and decryption will be spread all around.<br />
+			<br />
+			Additionally, you will need to add an extra layer of security to your system in order to protect your logs from third party access. Because the sensitive information are only obfuscated and, even though, not readable by human eye, they are still readable by computers.<br />
+			<br />
+			<h3 style="text-align: left;">
+			Conclusion</h3>
+			Ideally, the serialization libraries should support encryption/obfuscation of certain fields. In this way, we only need to mark those sensitive fields (for example using annotations in languages like Java) and the library will take care of this extra step. It will have the advantages of both approaches above: the encryption/decryption code is kept together, while the logic of what information is sensitive is kept to the source. Furthermore, the serialization library may provide you with non-reversible encryption or totally removing the sensitive data while serializing, to be used in the case of logging or similar.<br />
+			<div>
+				<br /></div>
+			</div>
+
+			<div class="lpage"></div>
+
+		</div>
+	</div>
+
+	<div class="footer">
+		KvK Number:  65354346 - BTW Number: NL002455714B97 - dockmeh-at-gmail-dot-com
+	</div>
+</body>
 </html>

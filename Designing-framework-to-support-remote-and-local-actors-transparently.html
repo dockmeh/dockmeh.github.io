@@ -1,30 +1,39 @@
 <html>
 <head>
-<link rel="stylesheet" href="./css/main.css" />
-  </head>
-<body>
-<div dir="ltr" style="text-align: left;" trbidi="on">
-<h2 style="text-align: left;">
-Actor Hierarchy</h2>
-The `Actor` interface should provide a `send` operation that allows putting messages into the callee’s queue. Now, we want to support distributing actors over various computers. It means that a given actor may send messages to other actors are either “local” or “remote”. Reciprocally, the actor may or may not be available remotely.<br />
-<br />
-In case of sending a message to local actors, the recipients can simply enqueue the incoming messages into their queues. But for remote actors, we must send the message over the wire to the recipient. To do so, we create queue-less actors (a so-called stubs) that in essence keep track of the actual actor’s location. We call the original actor, a “remotely available” actor.<br />
-<br />
-An actor can be made remotely available in two ways: (1) by being explicitly exported, (2) after it sends a message to a remote actor. In either case, such an actor needs to have a URI to allow receiving messages over the wire. To resolve messages coming in on the network, there needs to be a lookup table resolving URI’s to actor object references.<br />
-<br />
-What is important to note about this design is that apart from the lookup table of the exported actors, the framework keeps no reference to the actors. This means that non-exported local and remote actors are eligible for garbage collection (by JVM) in case they are not used anymore inside the application. In case of exported actors, the framework may provide an explicit “unexport” operation to remove them from the lookup table. Alternatively or in addition, the “remotely available” actors can keep count of their references (i.e., by how many remote nodes they are known); symmetrically, whenever a remote actor is garbage collected, it could inform the actual “remotely available” actor to decrease the reference count. Once the remotely available actor is not remotely references anymore, it can be automatically be removed from the lookup table.<br />
-<h3 style="text-align: left;">
-Futures</h3>
-When sending a message, an actor may expect to receive a result, which will be stored in a future. In case of remote messages, the actor stub (local to the caller) creates a stub future. When the callee is finished, it will inform the stub-actor about the result, with which the stub-future will be filled, thus allowing the caller to continue. In case the caller has sent the future as a parameter to a remote actor, the remote actors must be notified about the result using a similar approach.<br />
-<h4 style="text-align: left;">
-Notes:</h4>
-<br />
-<ul style="text-align: left;">
-<li>Remote actors have no queue, but they do have their full implementation available. This allows proper type checking of messages being sent to them.</li>
-<li>To model such distributed systems, the idea is to use deployment components offered by the ABS modeling language (see <a href="http://abs-models.org/chapter/modeling-deployment-architectures-in-abs/" rel="nofollow">here</a>).&nbsp;</li>
-</ul>
-<div>
-<br /></div>
-</div>
-  </body>
-  </html>
+	<link rel="stylesheet" href="./css/main.css" />
+	<title>Dockmeh Consultancy - Make Software Great</title>
+	<meta name="viewport" content="width=device-width, initial-scale=0.86, maximum-scale=3.0, minimum-scale=0.86">
+	<meta name="description" content="Freelance fullstack software engineering experts in distributed systems, quality software and data engineering">
+	<meta name="robots" content="INDEX,FOLLOW">
+	<meta name="GOOGLEBOT" content="INDEX,FOLLOW">
+</head>
+<body class="body">
+	<div class="page">
+		<div class="lpage"></div>
+		<div class="content">
+			<h2 style="text-align: left;">Actor Hierarchy</h2>
+			The `Actor` interface should provide a `send` operation that allows putting messages into the callee’s queue. Now, we want to support distributing actors over various computers. It means that a given actor may send messages to other actors are either “local” or “remote”. Reciprocally, the actor may or may not be available remotely.<br />
+			<br />
+			In case of sending a message to local actors, the recipients can simply enqueue the incoming messages into their queues. But for remote actors, we must send the message over the wire to the recipient. To do so, we create queue-less actors (a so-called stubs) that in essence keep track of the actual actor’s location. We call the original actor, a “remotely available” actor.<br />
+			<br />
+			An actor can be made remotely available in two ways: (1) by being explicitly exported, (2) after it sends a message to a remote actor. In either case, such an actor needs to have a URI to allow receiving messages over the wire. To resolve messages coming in on the network, there needs to be a lookup table resolving URI’s to actor object references.<br />
+			<br />
+			What is important to note about this design is that apart from the lookup table of the exported actors, the framework keeps no reference to the actors. This means that non-exported local and remote actors are eligible for garbage collection (by JVM) in case they are not used anymore inside the application. In case of exported actors, the framework may provide an explicit “unexport” operation to remove them from the lookup table. Alternatively or in addition, the “remotely available” actors can keep count of their references (i.e., by how many remote nodes they are known); symmetrically, whenever a remote actor is garbage collected, it could inform the actual “remotely available” actor to decrease the reference count. Once the remotely available actor is not remotely references anymore, it can be automatically be removed from the lookup table.<br />
+			<h3 style="text-align: left;">Futures</h3>
+			When sending a message, an actor may expect to receive a result, which will be stored in a future. In case of remote messages, the actor stub (local to the caller) creates a stub future. When the callee is finished, it will inform the stub-actor about the result, with which the stub-future will be filled, thus allowing the caller to continue. In case the caller has sent the future as a parameter to a remote actor, the remote actors must be notified about the result using a similar approach.<br />
+			<h4 style="text-align: left;">Notes:</h4>
+			<ul style="text-align: left;">
+				<li>Remote actors have no queue, but they do have their full implementation available. This allows proper type checking of messages being sent to them.</li>
+				<li>To model such distributed systems, the idea is to use deployment components offered by the ABS modeling language (see <a href="http://abs-models.org/chapter/modeling-deployment-architectures-in-abs/" rel="nofollow">here</a>).&nbsp;</li>
+			</ul>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="footer">
+		KvK Number:  65354346 - BTW Number: NL002455714B97 - dockmeh-at-gmail-dot-com
+	</div>
+</body>
+</html>
+
